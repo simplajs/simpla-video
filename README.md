@@ -55,7 +55,7 @@ Import simpla-video into the `<head>` of your document
 <link rel="import" href="/bower_components/simpla-video/simpla-video.html">
 ```
 
-And then use it on your page wherever you want to embed a video. Simpla-video currently supports Youtube and Vimeo URLs.
+And then use it on your page wherever you want to embed a video. You must also specify a content path (where the video's data will be stored on Simpla's API) in a `path` attribute. Simpla-video currently supports Youtube and Vimeo URLs.
 
 ```html
 <simpla-video path="/video"></simpla-video>

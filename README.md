@@ -1,7 +1,7 @@
 # Simpla Video
 ![Version][bower-badge] [![Build status][travis-badge]][travis-url] ![Size][size-badge] [![Published][webcomponents-badge]][webcomponents-url] [![Simpla slack group][slack-badge]][slack-url]
 
-Simpla-video is an editable video embed built on the Simpla content system. It lets you directly embed responsive videos from services like Youtube and Vimeo on your page.
+Simpla-video is an editable video embed built on the Simpla content system. It lets you directly embed responsive videos from services like Youtube and Vimeo on your page, and defer loading them until a user interacts with it.
 
 <!---
 ```

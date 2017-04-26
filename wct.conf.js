@@ -1,7 +1,7 @@
-{
-  "plugins": {
-    "local": {
-      "browsers": [ "chrome" ]
+module.exports = {
+  'plugins': {
+    'local': {
+      'browsers': [ 'chrome' ]
     }
   }
 }

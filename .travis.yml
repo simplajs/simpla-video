@@ -6,6 +6,7 @@ before_script:
 - npm install -g bower web-component-tester
 - bower install
 script: xvfb-run wct
+cache: yarn
 addons:
   apt:
     sources:

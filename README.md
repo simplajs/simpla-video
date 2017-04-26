@@ -180,7 +180,7 @@ MIT © Simpla <friends@simpla.io>
 [travis-url]: https://travis-ci.org/SimplaElements/simpla-video
 [bowerdeps-badge]: https://img.shields.io/gemnasium/SimplaElements/simpla-video.svg
 [bowerdeps-url]: https://gemnasium.com/bower/simpla-video
-[size-badge]: https://badges.herokuapp.com/size/github/SimplaElements/simpla-video/master/simpla-video.html?gzip=true&color=blue
+[size-badge]: https://badges.herokuapp.com/size/github/SimplaElements/simpla-video/master/simpla-video.html?gzip=true
 [webcomponents-badge]: https://img.shields.io/badge/webcomponents.org-published-blue.svg
 [webcomponents-url]: https://www.webcomponents.org/element/SimplaElements/simpla-video
 [slack-badge]: http://slack.simpla.io/badge.svg

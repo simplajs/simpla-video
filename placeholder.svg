@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400px" height="225px" viewBox="0 0 400 225" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <rect id="Background" fill="#E5E8EC" sketch:type="MSShapeGroup" x="0" y="0" width="400" height="225"></rect>
+        <path d="M189.4,135.225 L219.7,112.5 L189.4,89.775 L189.4,135.225 L189.4,135.225 L189.4,135.225 L189.4,135.225 Z M199.5,62 C171.624,62 149,84.624 149,112.5 C149,140.376 171.624,163 199.5,163 C227.376,163 250,140.376 250,112.5 C250,84.624 227.376,62 199.5,62 L199.5,62 L199.5,62 L199.5,62 Z M199.5,152.9 C177.2295,152.9 159.1,134.7705 159.1,112.5 C159.1,90.2295 177.2295,72.1 199.5,72.1 C221.7705,72.1 239.9,90.2295 239.9,112.5 C239.9,134.7705 221.7705,152.9 199.5,152.9 L199.5,152.9 L199.5,152.9 L199.5,152.9 Z" id="Icon" fill="#B2BCC8" sketch:type="MSShapeGroup"></path>
+    </g>
+</svg>

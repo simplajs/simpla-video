@@ -1,0 +1,389 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../simpla-element-behavior/simpla-element-behavior.html">
+<link rel="import" href="../simpla-styles/simpla-styles.html" async>
+
+<dom-module id="simpla-video">
+  <template>
+    <style>
+      :host, *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
+      .wrapper {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .wrapper[data-placeholder] {
+        background-size: cover !important;
+        background-position: center center !important;
+      }
+
+      /**
+       * Content
+       */
+      .video {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%;
+      }
+
+      .video__thumb,
+      .video__embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .video__thumb {
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      .video__embed[disabled] {
+        pointer-events: none;
+      }
+
+      /**
+       * Edit UI
+       */
+      .edit-target {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        cursor: pointer;
+        background: var(--simpla-light-black);
+        opacity: 0;
+        transition: opacity 200ms ease;
+      }
+
+      .edit-target:hover {
+        opacity: 1;
+      }
+
+      .input {
+        font-family: var(--simpla-font-family);
+        font-size: var(--simpla-scale-000);
+        font-weight: 200;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 90%;
+        margin: auto;
+        max-width: 30em;
+        padding: 0.9em 1em;
+        color: white;
+        background: var(--simpla-med-black);
+        border: 0;
+        outline: 0;
+        border-radius: 0 0 var(--simpla-border-radius) var(--simpla-border-radius);
+        z-index: 1;
+        transform: translateY(-101%);
+        transition: transform 80ms var(--simpla-easing-accelerate);
+      }
+
+      .input[visible] {
+        transform: translateY(0);
+        transition: transform 130ms var(--simpla-easing-decelerate);
+      }
+
+      .input::placeholder {
+        color: var(--simpla-bright-white);
+      }
+
+      /* Patch hidden prop on Chrome & IE */
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+
+    <div id="wrapper"
+      class="wrapper"
+      data-placeholder$="[[editable]]"
+    >
+
+      <template is="dom-if" if="[[editable]]">
+        <div
+          class="edit-target"
+          on-tap="_edit"
+          hidden$="[[active]]">
+        </div>
+
+        <input type="text"
+          id="src-input"
+          class="input"
+          value="{{_inputSrc::input}}"
+          placeholder="Enter Youtube or Vimeo URL"
+          hidden$="[[!editable]]"
+          visible$="[[active]]"
+          on-blur="_close"
+          on-keydown="_closeOnHotkeys"
+        >
+      </template>
+
+      <div class="video">
+
+        <img
+          class="video__thumb"
+          src$="[[_thumbnail]]"
+          on-tap="_loadVideo"
+          hidden$="[[!_displayThumbnail(defer, _videoReady)]]"
+        >
+
+        <iframe
+          class="video__embed"
+          src$="[[_embed]]"
+          allowtransparency="true"
+          frameborder="0"
+          scrolling="no"
+          allowfullscreen
+          mozallowfullscreen
+          webkitallowfullscreen
+          oallowfullscreen
+          msallowfullscreen
+          hidden$="[[!_videoLoaded]]"
+          disabled$="[[editable]]">
+        </iframe>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    import { getProvider, getId, generateEmbed, getThumbnail } from './utils';
+
+    const DEFAULT_PLACEHOLDER = 'placeholder.svg';
+
+    Polymer({
+      is: 'simpla-video',
+
+      properties: {
+
+        /**
+         * Src of the video
+         * Youtube or Vimeo URL
+         * @type {String}
+         */
+        src: {
+          type: String,
+          notify: true,
+          value: ''
+        },
+
+        /**
+         * URL input src, debounced to src prop
+         * @type {String}
+         */
+        _inputSrc: {
+          type: String,
+          observer: '_setSrc',
+        },
+
+        /**
+         * Whether src prompt open
+         * @type {Boolean}
+         */
+        active: {
+          type: Boolean,
+          notify: true,
+          value: false
+        },
+
+        /**
+         * Whether to load thumbnail instead
+         * of full video on first paint
+         * @type {Boolean}
+         */
+        defer: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Placeholder to show in src prompt
+         * @type {String}
+         */
+        placeholder: {
+          type: String
+        },
+
+        /**
+         * Generated embed URL of video
+         * @type {String}
+         */
+        _embed: String,
+
+        /**
+         * Generated thumbnail src of video
+         * @type {String}
+         */
+        _thumbnail: String,
+
+        /**
+         * Whether video has been loaded into iframe
+         * @type {Boolean}
+         */
+        _videoReady: {
+          type: Boolean,
+          value: false
+        }
+
+      },
+
+      observers: [
+        '_initVideo(src)',
+        '_ensureInactiveOnIneditable(editable)',
+        '_showPlaceholder(editable)'
+      ],
+
+      behaviors: [ SimplaBehaviors.Element ],
+
+      /**
+       * Setup Simpla connector
+       * @return {undefined}
+       */
+      created() {
+        this.setupSimpla({
+          type: 'Video',
+          dataProperties: [ 'src' ]
+        });
+      },
+
+      /**
+       * Debounce setting src from input
+       * @param {String} inputSrc Value of the URL input
+       * @return {undefined}
+       */
+      _setSrc(inputSrc) {
+        this.debounce('setSrc', () => {
+          this.src = inputSrc;
+        }, 100);
+      },
+
+      /**
+       * Setup the video when src changes
+       * @param  {String} src URL of the video to setup
+       * @return {undefined}
+       */
+      _initVideo(src) {
+        if (!src) {
+          this._embed = '';
+          this._thumbnail = '';
+          return;
+        }
+
+        this._videoReady = false;
+
+        if (this.defer) {
+          this._generateThumbnail(src);
+        } else {
+          this._generateEmbed(src);
+        }
+      },
+
+      /**
+       * Generates appropriate embed URL for iframe
+       * @param  {String} src Video src URL
+       * @return {undefined}
+       */
+      _generateEmbed: function(src) {
+        let provider = getProvider(src),
+            id = getId(src, provider);
+
+        this._embed = id && provider ? generateEmbed(id, provider) : '';
+        this._videoReady = true;
+      },
+
+      /**
+       * Generates thumbnail src for video
+       * @param  {String} src Video src URL
+       * @return {undefined}
+       */
+      _generateThumbnail: function(src) {
+        let provider = getProvider(src),
+            id = getId(src, provider);
+
+        getThumbnail(id, provider)
+          .then(thumbnail => this._thumbnail = thumbnail);
+      },
+
+      /**
+       * Utilty method to load video, used by thumbnail tap
+       * @return {undefined}
+       */
+      _loadVideo() {
+        this._generateEmbed(this.src);
+      },
+
+      _showPlaceholder(editable) {
+        let placeholderEl = this.$.wrapper;
+
+        this.placeholder = this.placeholder || `url(${this.resolveUrl(DEFAULT_PLACEHOLDER)})`;
+
+        placeholderEl.style.background = editable ? this.placeholder : '';
+      },
+
+      /**
+       * Whether to display the thumbnail image
+       * @param  {Boolean} defer      Whether to defer video load
+       * @param  {Boolean} videoReady Whether video has been loaded in iframe
+       * @return {Boolean}            Whether to display thumbnail
+       */
+      _displayThumbnail(defer, videoReady) {
+        return defer && !videoReady;
+      },
+
+      /**
+       * Goes active and focuses src prompt if editable
+       * @return {undefined}
+       */
+      _edit() {
+        if (this.editable) {
+          this.active = true;
+          this.$$('#src-input').focus();
+        }
+      },
+
+      /**
+       * Goes inactive if editable
+       * @return {undefined}
+       */
+      _close() {
+        if (this.editable) {
+          this.active = false;
+        }
+      },
+
+      /**
+       * Goes inactive if vertain hotkeys pressed
+       * @param  {Event} e Keydown event from src input
+       * @return {undefined}
+       */
+      _closeOnHotkeys(e) {
+        let enter = e.keyCode === 13,
+            escape = e.keyCode === 27;
+
+        if (this.active && (enter || escape)) {
+          this.active = false;
+        }
+      },
+
+      /**
+       * Ensures active if false when editable is false
+       * @param  {Boolean} editable Whether element is editable
+       * @return {undefined}
+       */
+      _ensureInactiveOnIneditable(editable) {
+        if (!editable) {
+          this.active = false;
+        }
+      }
+    });
+  </script>
+</dom-module>

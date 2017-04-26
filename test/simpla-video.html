@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>simpla-video</title>
+    <script src="https://unpkg.com/webcomponents.js@^0.7.24/webcomopnents-lite.min.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <!-- Import & setup Simpla -->
+    <script src="https://unpkg.com/simpla@^2.0.0"></script>
+    <script>
+      Simpla.init('dummy');
+    </script>
+
+    <!-- Import the element to test -->
+    <link rel="import" href="../simpla-video.html">
+
+  </head>
+  <body>
+    <test-fixture id="default">
+      <template>
+        <simpla-video></simpla-video>
+      </template>
+    </test-fixture>
+    <script>
+      var TEST_VIDEOS = {
+            vimeo: 'https://vimeo.com/55073825',
+            youtube: 'https://www.youtube.com/watch?v=tf1bytsDDho'
+          },
+          EXPECTED_EMBEDS = {
+            vimeo: 'https://player.vimeo.com/video/55073825?title=0&byline=0',
+            youtube: 'https://www.youtube.com/embed/tf1bytsDDho?rel=0&showinfo=0'
+          },
+          EXPECTED_THUMBS = {
+            vimeo: 'https://i.vimeocdn.com/video/424130492_640.jpg',
+            youtube: 'https://img.youtube.com/vi/tf1bytsDDho/hqdefault.jpg'
+          };
+
+      describe('<simpla-video>', function() {
+        var component;
+
+        beforeEach(function() {
+          component = fixture('default');
+        });
+
+        it('is okay', function() {
+          expect(component).to.be.ok;
+        });
+
+        describe('embeds', function() {
+          it('generates the correct embed URL from Vimeo sources', function() {
+            component.src = TEST_VIDEOS.vimeo;
+            expect(component._embed).to.equal(EXPECTED_EMBEDS.vimeo);
+          });
+
+          it('generates the correct embed URL from Youtube sources', function() {
+            component.src = TEST_VIDEOS.youtube;
+            expect(component._embed).to.equal(EXPECTED_EMBEDS.youtube);
+          });
+        });
+
+        describe('deferred loading', function() {
+          it('generates a thumbnail rather than embed when defer is true', function() {
+            component.defer = true;
+            component.src = TEST_VIDEOS.vimeo;
+
+            expect(component._embed).to.not.be.okay;
+            expect(component._thumbnail).to.be.okay;
+          });
+
+          it('generates the correct thumbnail from Vimeo sources', function() {
+            component.defer = true;
+            component.src = TEST_VIDEOS.vimeo;
+
+            // Vimeo requires fetching from a remote API, monkeypatch request lag
+            setTimeout(function() {
+              expect(component._thumbnail).to.equal(EXPECTED_THUMBS.vimeo);
+            }, 1000)
+          });
+
+          it('generates the correct thumbnail from Youtube sources', function() {
+            component.defer = true;
+            component.src = TEST_VIDEOS.youtube;
+
+            // Youtube resolves instantly, but is still async
+            setTimeout(function() {
+              expect(component._thumbnail).to.equal(EXPECTED_THUMBS.youtube);
+            }, 1)
+          });
+        });
+
+      });
+    </script>
+  </body>
+</html>

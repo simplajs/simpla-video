@@ -1,0 +1,40 @@
+{
+  "name": "simpla-video",
+  "version": "0.0.0",
+  "authors": [
+    "Simpla <friends@simpla.io>"
+  ],
+  "description": "Embed responsive videos from Youtube and Vimeo on your page",
+  "keywords": [
+    "simpla",
+    "video",
+    "editable",
+    "responsive",
+    "embed",
+    "web component",
+    "custom element",
+    "content management"
+  ],
+  "main": "simpla-video.html",
+  "license": "MIT",
+  "homepage": "https://github.com/SimplaElements/simpla-video/",
+  "demos": {
+    "Demo": "demo/index.html"
+  },
+  "ignore": [
+    "*",
+    "!src",
+    "!*.html",
+    "!LICENSE"
+  ],
+  "dependencies": {
+    "polymer": "^1.8.0",
+    "simpla-element-behavior": "^0.1.2",
+    "simpla-styles": "^1.0.1"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5",
+    "web-component-tester": "^4.0.0",
+    "simpla-demo-helper": "^0.1.3"
+  }
+}

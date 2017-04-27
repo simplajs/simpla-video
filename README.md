@@ -142,7 +142,7 @@ You can set custom placeholders (displayed when simpla-video is editable and doe
 
 Property      | Type    | Default           | Description                                                   
 ------------- | ------- | ----------------- | -----------                                                   
-`src`         | String  | ''                | Source URL of the video to embed
+`src`         | String  | `''`              | Source URL of the video to embed
 `path`        | String  | `undefined`       | Path to the data for the video on Simpla's API
 `placeholder` | String  | `placeholder.svg` | Placeholder to show when video is editable and has no content 
 `editable`    | Boolean | `false`           | Whether the image is editable                                 

@@ -158,7 +158,11 @@
   <script>
     import { getProvider, getId, generateEmbed, getThumbnail } from './utils';
 
-    const DEFAULT_PLACEHOLDER = 'placeholder.svg';
+    const SIMPLA_CONFIG = {
+            type: 'Video',
+            dataProperties: [ 'src' ]
+          },
+          DEFAULT_PLACEHOLDER = 'placeholder.svg';
 
     Polymer({
       is: 'simpla-video',
@@ -242,18 +246,7 @@
         '_showPlaceholder(editable)'
       ],
 
-      behaviors: [ SimplaBehaviors.Element ],
-
-      /**
-       * Setup Simpla connector
-       * @return {undefined}
-       */
-      created() {
-        this.setupSimpla({
-          type: 'Video',
-          dataProperties: [ 'src' ]
-        });
-      },
+      behaviors: [ SimplaBehaviors.Element(SIMPLA_CONFIG) ],
 
       /**
        * Debounce setting src from input

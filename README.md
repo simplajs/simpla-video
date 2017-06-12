@@ -1,7 +1,7 @@
 # Simpla Video
-![Version][bower-badge] [![Build status][travis-badge]][travis-url] ![Size][size-badge] [![Published][webcomponents-badge]][webcomponents-url] [![Simpla slack group][slack-badge]][slack-url]
+[![Build status][travis-badge]][travis-url] ![Size][size-badge] ![Version][bower-badge] [![Published][webcomponents-badge]][webcomponents-url] [![Simpla slack group][slack-badge]][slack-url]
 
-Simpla-video is an editable video embed built on the Simpla content system. It lets you directly embed responsive videos from services like Youtube and Vimeo on your page, and defer loading them until a user interacts with it.
+Simpla-video is an editable video element. It lets you directly embed responsive videos from services like Youtube and Vimeo on your page, and defer loading them until user interaction. It's built on the [Simpla][simpla] content system.
 
 <!---
 ```
@@ -36,42 +36,24 @@ Simpla-video is an editable video embed built on the Simpla content system. It l
 Install simpla-video with Bower (Yarn support coming soon)
 
 ```sh
-$ bower install simpla-video --save
+$ bower i simpla-video --save
 ```
 
-Then include the Simpla library and setup a project (read more about [setting up Simpla](https://www.simpla.io/docs/guides/get-started))
-
-```html
-<script src="https://unpkg.com/simpla@^2.0.0"></script>
-<script>
-  // TODO: replace 'project-id' with your project ID
-  Simpla.init('project-id')
-</script>
-```
-
-Import simpla-video into the `<head>` of your document
+[Setup Simpla][setup-simpla] on your page, then import simpla-video into your `<head>`
 
 ```html
 <link rel="import" href="/bower_components/simpla-video/simpla-video.html">
 ```
 
-And then use it on your page wherever you want to embed a video. You must also specify a content path (where the video's data will be stored on Simpla's API) in a `path` attribute. Simpla-video currently supports Youtube and Vimeo URLs.
+Use `<simpla-video>` wherever you want to embed a video. Give each video a unique `path`, where it will store its content in your project
 
 ```html
 <simpla-video path="/video"></simpla-video>
 ```
 
-### Polyfills for cross-browser support
-
-`simpla-video` relies on emerging standards, for full cross-browser support make sure you include the [Web Components Lite](https://github.com/webcomponents/webcomponentsjs) polyfill.
-
-```html
-<script src="https://unpkg.com/webcomponents.js@^0.7.24/webcomponents-lite.min.js" async></script>
-```
-
 ## Editing content
 
-Edit the src of a simpla-video by entering edit mode with Simpla (which makes all Simpla elements on a page editable) or setting the `editable` property directly on the element.
+Edit a simpla-video by entering edit mode with Simpla (which makes all Simpla elements on a page editable) or setting the `editable` property directly on the element.
 
 ```js
 // Enter edit mode
@@ -83,22 +65,18 @@ Simpla.editable(true);
 <simpla-video path="/video" editable></simpla-video>
 ```
 
-Entering edit mode with Simpla is the recommended way to edit video embeds. It ensures all elements on a page remain in sync and updates Simpla's public `'editable'` state, which other elements may rely on.
-
-> If you include the [simpla-admin](https://webcomponents.org/element/SimplaElements/simpla-admin) component on your page, you can also enter edit mode by adding #edit to the end of your URL
+Entering edit mode with Simpla is the recommended way to edit video embeds. It ensures all elements on a page remain in sync and updates Simpla's public `editable` state, which other elements may rely on.
 
 ## Saving content
 
-Save a `simpla-video` by calling Simpla's `save` method, which will save all modified content on the page. It returns a promise.
+Save a simpla-video by calling Simpla's `save()` method, which will save all modified content on the page. It returns a promise.
 
 ```js
 // Save all modified Simpla content
 Simpla.save();
 ```
 
-Note you must be authenticated before saving content - either login with `simpla-admin` or the `Simpla.login()` method.
-
-> If you have included the [simpla-admin](http://webcomponents.org/element/SimplaElements/simpla-admin) component on your site, you can save content by entering edit mode and just pressing the 'save' button.
+> You must be authenticated with Simpla before saving content
 
 ## Responsive videos
 
@@ -106,7 +84,7 @@ Simpla-video is fully responsive, you can give it any valid CSS `width` (includi
 
 ## Deferred loading
 
-You can defer the loading of a video until the user clicks on it with the `defer` property
+Defer the loading of a video until the user clicks on it with the `defer` property
 
 ```html
 <simpla-video path="/video" defer></simpla-video>
@@ -124,11 +102,11 @@ You can set the `src` of simpla-video directly, using a URL from either Vimeo or
 
 Initializing with static content is useful for bootstrapping a project with predefined content. By setting `src` and then calling `Simpla.save()` you can easily set content directly to Simpla.
 
-**Note:** Since `src` is always overwritten by remote data, you should not have `src` set in production, because if a newer video source gets saved you will experience FOUC (Flash Of Unformatted Content) when the old one is overwritten
+> Since static content is overwritten by remote data, you should not have `src` set in production. If a newer video gets saved you will experience FOUC (Flash Of Unformatted Content) when the old one is overwritten 
 
 ## Custom placeholders
 
-You can set custom placeholders (displayed when simpla-video is editable and does not have a video src set) the same way as native elements, with a `placeholder` attribute
+You can set custom placeholders (displayed when simpla-video is editable and does not have a video src set) with a `placeholder` attribute
 
 ```html
 <simpla-video path="/video" placeholder="url(https://i.vimeocdn.com/video/499134794_1280x720.jpg)">
@@ -141,12 +119,13 @@ You can set custom placeholders (displayed when simpla-video is editable and doe
 ### Properties
 
 Property      | Type    | Default           | Description                                                   
-------------- | ------- | ----------------- | -----------                                                   
+------------- | ------- | ----------------- | -----------                     
+`path`        | String  | `undefined`       | Path to the data for the video on Simpla's API                              
 `src`         | String  | `''`              | Source URL of the video to embed
-`path`        | String  | `undefined`       | Path to the data for the video on Simpla's API
 `placeholder` | String  | `placeholder.svg` | Placeholder to show when video is editable and has no content 
-`editable`    | Boolean | `false`           | Whether the image is editable                                 
-`active`      | Boolean | `false`           | Whether the image is currently being edited                   
+`editable`    | Boolean | `false`           | Whether the video is editable                                 
+`active`      | Boolean | `false`           | Whether the video is currently being edited                   
+`loaded`      | Boolean | `false`           | Whether the video src has been loaded from Simpla
 
 Properties can be set either directly with JavaScript or as attributes on the element
 
@@ -165,15 +144,18 @@ Event              | Description
 `src-changed`      | Fired whenever the `src` property changes      
 `editable-changed` | Fired whenever the `editable` property changes 
 `active-changed`   | Fired whenever the `active` property changes   
+`loaded-changed`   | Fired whenever the `loaded` property changes   
 
 ## Contributing
 
 If you find any issues with simpla-video please report them! If you'd like to see a new feature in supported file an issue or let us know in Simpla's public [Slack group](https://slack.simpla.io). We also happily accept PRs. 
 
----
+***
 
-MIT © Simpla <friends@simpla.io>
+MIT © [Simpla][simpla]
 
+[simpla]: https://www.simpla.io
+[setup-simpla]: https://www.simpla.io/docs/guides/get-started
 [bower-badge]: https://img.shields.io/bower/v/simpla-video.svg
 [bowerlicense-badge]: https://img.shields.io/bower/l/simpla-video.svg
 [travis-badge]: https://img.shields.io/travis/SimplaElements/simpla-video.svg

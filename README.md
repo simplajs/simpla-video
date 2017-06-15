@@ -31,6 +31,23 @@ Simpla-video is an editable video element. It lets you directly embed responsive
 <simpla-video path="/video"></simpla-video>
 ```
 
+### Contents
+
+- [Installation and setup](#installation-and-setup)
+- [Editing content](#editing-content)
+- [Saving content](#saving-content)
+- [Responsive videos](#responsive-videos)
+- [Deferred loading](#deferred-loading)
+- [Initializing with static content](#initializing-with-static-content)
+- [Custom placeholders](#custom-placeholders)
+- [Contributing](#contributing)
+
+### Resources
+
+- [API reference][api]
+- [Demo][demo]
+- [License][license]
+
 ## Installation and setup
 
 Install simpla-video with Bower (Yarn support coming soon)
@@ -39,7 +56,7 @@ Install simpla-video with Bower (Yarn support coming soon)
 $ bower i simpla-video --save
 ```
 
-[Setup Simpla][setup-simpla] on your page, then import simpla-video into your `<head>`
+[Setup Simpla][simpla-setup] on your page, then import simpla-video into your `<head>`
 
 ```html
 <link rel="import" href="/bower_components/simpla-video/simpla-video.html">
@@ -114,48 +131,21 @@ You can set custom placeholders (displayed when simpla-video is editable and doe
 
 `placeholder` takes any valid CSS `background` value (colors, `url()`, etc). The placeholder does not impact the video's default size or aspect ratio.
 
-## API reference
-
-### Properties
-
-Property      | Type    | Default           | Description                                                   
-------------- | ------- | ----------------- | -----------                     
-`path`        | String  | `undefined`       | Path to the data for the video on Simpla's API                              
-`src`         | String  | `''`              | Source URL of the video to embed
-`placeholder` | String  | `placeholder.svg` | Placeholder to show when video is editable and has no content 
-`editable`    | Boolean | `false`           | Whether the video is editable                                 
-`active`      | Boolean | `false`           | Whether the video is currently being edited                   
-`loaded`      | Boolean | `false`           | Whether the video src has been loaded from Simpla
-
-Properties can be set either directly with JavaScript or as attributes on the element
-
-```html
-<simpla-video path="/video" placeholder="pink">
-
-<script>
-  document.querySelector('simpla-video').editable = true;
-</script>
-```
-
-### Events
-
-Event              | Description                                    
------------------- | -----------                                    
-`src-changed`      | Fired whenever the `src` property changes      
-`editable-changed` | Fired whenever the `editable` property changes 
-`active-changed`   | Fired whenever the `active` property changes   
-`loaded-changed`   | Fired whenever the `loaded` property changes   
-
 ## Contributing
 
-If you find any issues with simpla-video please report them! If you'd like to see a new feature in supported file an issue or let us know in Simpla's public [Slack group](https://slack.simpla.io). We also happily accept PRs. 
+If you find any issues with simpla-video please report them! If you'd like to see a new feature in supported file an issue or let us know in Simpla's public [Slack group][slack-url]. We also happily accept PRs. 
 
 ***
 
 MIT © [Simpla][simpla]
 
 [simpla]: https://www.simpla.io
-[setup-simpla]: https://www.simpla.io/docs/guides/get-started
+[simpla-setup]: https://www.simpla.io/docs/guides/get-started
+
+[api]: https://www.webcomponents.org/element/SimplaElements/simpla-video/page/API.md
+[demo]: https://www.webcomponents.org/element/SimplaElements/simpla-video/demo/demo/index.html
+[license]: https://github.com/SimplaElements/simpla-video/blob/master/LICENSE
+
 [bower-badge]: https://img.shields.io/bower/v/simpla-video.svg
 [bowerlicense-badge]: https://img.shields.io/bower/l/simpla-video.svg
 [travis-badge]: https://img.shields.io/travis/SimplaElements/simpla-video.svg

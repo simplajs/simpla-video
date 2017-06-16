@@ -2,14 +2,15 @@
 
 ## Properties
 
-Property      | Type    | Default             | Description                                                   
-------------- | ------- | ------------------- | -----------                     
-`path`        | String  | `undefined`         | Path to the data for the video on Simpla's API                              
-`src`         | String  | `''`                | Source URL of the video to embed
-`placeholder` | String  | `'placeholder.svg'` | Placeholder to show when video is editable and has no content 
-`editable`    | Boolean | `false`             | Whether the video is editable                                 
-`active`      | Boolean | `false`             | Whether the video is currently being edited                   
-`loaded`      | Boolean | `false`             | Whether the video src has been loaded from Simpla
+Property      | Type      | Default             | Description                                                   
+------------- | --------- | ------------------- | -----------                     
+`path`        | `String`  | `undefined`         | Path to the data for the video on Simpla's API                              
+`src`         | `String`  | `''`                | Source URL of the video to embed
+`placeholder` | `String`  | `'placeholder.svg'` | Placeholder to show when video is editable and has no content 
+`editable`    | `Boolean` | `false`             | Whether the video is editable   
+`readonly`    | `Boolean` | `false`             | Whether the video is able to become editable                                                               
+`active`      | `Boolean` | `false`             | Whether the video is currently being edited                   
+`loaded`      | `Boolean` | `false`             | Whether the video src has been loaded from Simpla
 
 Properties can be set either directly with JavaScript or as attributes on the element
 

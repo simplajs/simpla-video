@@ -40,6 +40,7 @@ Simpla-video is an editable video element. It lets you directly embed responsive
 - [Deferred loading](#deferred-loading)
 - [Initializing with static content](#initializing-with-static-content)
 - [Custom placeholders](#custom-placeholders)
+- [Readonly](#readonly)
 - [Contributing](#contributing)
 
 ### Resources
@@ -130,6 +131,14 @@ You can set custom placeholders (displayed when simpla-video is editable and doe
 ```
 
 `placeholder` takes any valid CSS `background` value (colors, `url()`, etc). The placeholder does not impact the video's default size or aspect ratio.
+
+## Readonly
+
+Simpla-video has a `readonly` property that stops it from becoming editable, even if Simpla is in edit mode or you try to set `editable` on the element directly. This is useful for using simpla-video to purely consume and display content from Simpla's API.
+
+```html
+<simpla-video path="/video" readonly>
+```
 
 ## Contributing
 

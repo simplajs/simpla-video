@@ -119,7 +119,7 @@
         <input type="text"
           id="src-input"
           class="input"
-          value="{{_inputSrc::input}}"
+          value="{{src::input}}"
           placeholder="Enter Youtube or Vimeo URL"
           hidden$="[[!editable]]"
           visible$="[[active]]"
@@ -180,17 +180,7 @@
           value: ''
         },
 
-        /**
-         * URL input src, debounced to src prop
-         * @type {String}
-         */
-        _inputSrc: {
-          type: String,
-          observer: '_setSrc',
-        },
-
-        /**
-         * Whether src prompt open
+        /* Whether src prompt open
          * @type {Boolean}
          */
         active: {
@@ -247,17 +237,6 @@
       ],
 
       behaviors: [ SimplaBehaviors.Element(SIMPLA_CONFIG) ],
-
-      /**
-       * Debounce setting src from input
-       * @param {String} inputSrc Value of the URL input
-       * @return {undefined}
-       */
-      _setSrc(inputSrc) {
-        this.debounce('setSrc', () => {
-          this.src = inputSrc;
-        }, 100);
-      },
 
       /**
        * Setup the video when src changes

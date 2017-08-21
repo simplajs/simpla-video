@@ -1,6 +1,6 @@
 {
   "name": "simpla-video",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Embed responsive videos from Youtube and Vimeo on your page",
   "main": "simpla-video.html",
   "scripts": {

@@ -149,7 +149,7 @@ If you find any issues with simpla-video please report them! If you'd like to se
 MIT © [Simpla][simpla]
 
 [simpla]: https://www.simpla.io
-[simpla-setup]: https://docs.simpla.io/guides/get-started.htlm
+[simpla-setup]: https://docs.simpla.io/guides/get-started.html
 
 [api]: https://www.webcomponents.org/element/simplaio/simpla-videw/page/API.md
 [demo]: https://www.webcomponents.org/element/simplaio/simpla-video/demo/demo/index.html

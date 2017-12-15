@@ -1,5 +1,5 @@
 # Simpla Video
-[![Build status][travis-badge]][travis-url] ![Size][size-badge] ![Version][bower-badge] [![Published][webcomponents-badge]][webcomponents-url] [![Simpla slack group][slack-badge]][slack-url]
+[![Build status][travis-badge]][travis-url] ![Size][size-badge] ![Version][bower-badge] [![Published][webcomponents-badge]][webcomponents-url]
 
 Simpla-video is an editable video element. It lets you directly embed responsive videos from services like Youtube and Vimeo on your page, and defer loading them until user interaction. It's built on the [Simpla][simpla] content system.
 
@@ -142,28 +142,22 @@ Simpla-video has a `readonly` property that stops it from becoming editable, eve
 
 ## Contributing
 
-If you find any issues with simpla-video please report them! If you'd like to see a new feature in supported file an issue or let us know in Simpla's public [Slack group][slack-url]. We also happily accept PRs. 
+If you find any issues with simpla-video please report them! If you'd like to see a new feature in supported file an issue. We also happily accept PRs. 
 
 ***
 
 MIT © [Simpla][simpla]
 
 [simpla]: https://www.simpla.io
-[simpla-setup]: https://www.simpla.io/docs/guides/get-started
+[simpla-setup]: https://docs.simpla.io/guides/get-started.htlm
 
-[api]: https://www.webcomponents.org/element/SimplaElements/simpla-video/page/API.md
-[demo]: https://www.webcomponents.org/element/SimplaElements/simpla-video/demo/demo/index.html
-[license]: https://github.com/SimplaElements/simpla-video/blob/master/LICENSE
+[api]: https://www.webcomponents.org/element/simplaio/simpla-videw/page/API.md
+[demo]: https://www.webcomponents.org/element/simplaio/simpla-video/demo/demo/index.html
+[license]: https://github.com/simplaio/simpla-video/blob/master/LICENSE
 
 [bower-badge]: https://img.shields.io/bower/v/simpla-video.svg
-[bowerlicense-badge]: https://img.shields.io/bower/l/simpla-video.svg
-[travis-badge]: https://img.shields.io/travis/SimplaElements/simpla-video.svg
-[travis-url]: https://travis-ci.org/SimplaElements/simpla-video
-[bowerdeps-badge]: https://img.shields.io/gemnasium/SimplaElements/simpla-video.svg
-[bowerdeps-url]: https://gemnasium.com/bower/simpla-video
-[size-badge]: https://badges.herokuapp.com/size/github/SimplaElements/simpla-video/master/simpla-video.html?gzip=true
+[travis-badge]: https://img.shields.io/travis/simplaio/simpla-video.svg
+[travis-url]: https://travis-ci.org/simplaio/simpla-video
+[size-badge]: http://img.badgesize.io/simplaio/simpla-video/master/simpla-img.html?compression=gzip&label=render_bundle_%28gzip%29
 [webcomponents-badge]: https://img.shields.io/badge/webcomponents.org-published-blue.svg
-[webcomponents-url]: https://www.webcomponents.org/element/SimplaElements/simpla-video
-[slack-badge]: http://slack.simpla.io/badge.svg
-[slack-url]: https://slack.simpla.io
-
+[webcomponents-url]: https://www.webcomponents.org/element/simplaio/simpla-video

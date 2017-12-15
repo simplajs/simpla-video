@@ -158,6 +158,6 @@ MIT © [Simpla][simpla]
 [bower-badge]: https://img.shields.io/bower/v/simpla-video.svg
 [travis-badge]: https://img.shields.io/travis/simplaio/simpla-video.svg
 [travis-url]: https://travis-ci.org/simplaio/simpla-video
-[size-badge]: http://img.badgesize.io/simplaio/simpla-video/master/simpla-img.html?compression=gzip&label=render_bundle_%28gzip%29
+[size-badge]: http://img.badgesize.io/simplaio/simpla-video/master/simpla-video.html?compression=gzip&label=render_bundle_%28gzip%29
 [webcomponents-badge]: https://img.shields.io/badge/webcomponents.org-published-blue.svg
 [webcomponents-url]: https://www.webcomponents.org/element/simplaio/simpla-video
